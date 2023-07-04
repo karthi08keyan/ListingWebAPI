@@ -1,0 +1,58 @@
+﻿
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+
+        <div class="row mt-4">
+            <div class="col-3">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tabItems" data-toggle="pill" href="/Home/items">Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tabItemsList" data-toggle="pill" href="/Home/itemsList">Items List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tabCustomers" data-toggle="pill" href="#customers">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tabCustomersList" data-toggle="pill" href="#customersList">Customers List</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="items">
+                        <h3>Items Tab Content</h3>
+                        <!-- Add your Items tab content here -->
+                    </div>
+                    <div class="tab-pane fade" id="itemsList">
+                        <h3>Items List Tab Content</h3>
+                        <!-- Add your Items List tab content here -->
+                    </div>
+                    <div class="tab-pane fade" id="customers">
+                        <h3>Customers Tab Content</h3>
+                        <!-- Add your Customers tab content here -->
+                    </div>
+                    <div class="tab-pane fade" id="customersList">
+                        <h3>Customers List Tab Content</h3>
+                        <!-- Add your Customers List tab content here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+

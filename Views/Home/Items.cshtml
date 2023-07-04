@@ -1,0 +1,312 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    var apiUrl = Configuration["AppSettings:ApiUrl"];
+    ViewBag.ApiUrl = apiUrl;
+}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+<style >
+    .form-control {
+       border-color: unset;
+       }
+    label {
+        top: 0;
+        transform: translateY(0);
+        font-size: 1rem;
+        
+        font-weight: 700;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        margin-top: 100px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 17px;
+        padding: 40px;
+        background-color: #fff;
+        font-family: 'Roboto Mono', monospace;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<body style="
+  background-image: -webkit-linear-gradient( 136deg,rgb(0,0,70) 0%,rgb(28,181,224) 100%);
+">
+    <div class="container itemClass">
+        <div class="row  " id="stuFirstForm" style=" border-radius: 17px;">
+            <form id="basic-form" action="" method="post">
+                <div class="row  mb-3">
+                    <span style="
+                text-align: center;
+                font-size: 28px;
+               ">Add Item</span>
+                </div>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label" style="color:black">Item Name</label>
+
+                            <input type="text" class="form-control" name="strItemName" id="strItemName">
+                            
+                            <!-- <span class="errorEmail"></span> -->
+                      
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Item Code</label>
+                     
+                            <input type="text" class="form-control " name="strItemCode" id="strItemCode">
+                            
+                            <span class="errorPhone"></span>
+                       
+                    </div>
+
+
+
+                    <div class="col mb-3">
+
+                        <label class="form-label">Stock</label>
+                            <input type="text" class="form-control" name="strStock" id="strStock">
+                          
+                            <!-- <span class="errorEmail"></span> -->
+                     
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Price</label>
+                            <input type="text" class="form-control" name="strRate" id="strRate">
+                          
+                            <!-- <span class="errorEmail"></span> -->
+                      
+                    </div>
+
+                    <div class="col mb-3">
+
+                        <label class="form-label">GST Price</label>
+                            <input type="text" class="form-control" name="strGstRate" id="strGstRate">
+                           
+                            <!-- <span class="errorEmail"></span> -->
+                      
+                    </div>
+                    
+                </div>
+
+
+                <div class="row">
+                    <div class="col mb-3 " style="text-align: center;">
+                        <button class="btn btn-lg text-white " type="submit" id="strItemSubmit" style=" border-radius: 26px;
+                   width: 86%;background-color: #55acee;
+               ">
+                            Add Items&nbsp;<i class="fa fa-chevron-circle-right" style="font: size 22px;"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </form>
+
+        </div>
+            </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                var itemName = localStorage.getItem("itemName");
+                var itemCode = localStorage.getItem("itemCode");
+                var stock = localStorage.getItem("stock");
+                var rate = localStorage.getItem("rate");
+                var gstRate = localStorage.getItem("gstRate");
+                var id = localStorage.getItem("id");
+                console.log("ghg");
+                // Clear the localStorage
+                  localStorage.removeItem("id");
+                localStorage.removeItem("itemName");
+                localStorage.removeItem("itemCode");
+                localStorage.removeItem("stock");
+                localStorage.removeItem("rate");
+                localStorage.removeItem("gstRate");
+                $("#strItemName").val(itemName);
+                $("#strItemCode").val(itemCode);
+                $("#strStock").val(stock);
+                $("#strRate").val(rate);
+                $("#strGstRate").val(gstRate);
+                var inputName = $('#strItemName');
+                var errorName = $('.errorName');
+                //var itemsUrl = "ItemsList.cshtml";
+                //$("#itemsContainer").load(itemsUrl);
+
+            
+                inputName.on('keypress', function (event) {
+                    var key = String.fromCharCode(event.which);
+                    var pattern = /[a-zA-Z ]/;
+                    if (!pattern.test(key)) {
+                        event.preventDefault();
+                        errorName.text('Only alphabetic characters are allowed').css("color", "red").css("padding-left", "10px");;
+                    } else {
+                        errorName.text('');
+                    }
+                });
+                var inputStock = $('#strStock');
+                inputStock.on('keypress', function (e) {
+                    var key = String.fromCharCode(e.which);
+
+
+                    if (!/^\d$/.test(key)) {
+                        e.preventDefault();
+                    }
+                });
+                $("#strRate").keypress(function (e) {
+                    var key = String.fromCharCode(e.which);
+
+
+                    if (!/^\d$|\.$/.test(key)) {
+                        e.preventDefault();
+                    }
+                });
+                $("#strGstRate").keypress(function (e) {
+                    var key = String.fromCharCode(e.which);
+
+
+                    if (!/^\d$|\.$/.test(key)) {
+                        e.preventDefault();
+                    }
+                });
+                $("#basic-form").validate({
+                    errorContainer: "#messageBox1, #messageBox2",
+                    errorLabelContainer: "#messageBox1 ",
+                    wrapper: "h6", debug: true,
+                    rules: {
+                        strItemName: {
+                            required: true,
+
+                        }, strItemCode: {
+                            required: true,
+                        },
+
+                        strStock: {
+                            required: true,
+
+                        },
+                        strRate: {
+                            required: true,
+
+                        },
+                        strGstRate: {
+                            required: true,
+
+                        }
+                    },
+                    messages: {
+                        strItemName: {
+                            required: "Please enter an item name",
+
+                        },
+                        strItemCode: {
+                            required: "Please enter a itemCode ",
+                        },
+                        strStock: {
+                            required: "Please enter a stock quantity",
+
+                        },
+                        strRate: {
+                            required: "Please enter a rate",
+
+                        },
+                        strGstRate: {
+                            required: "Please enter a GST rate",
+
+                        }
+                    },
+
+                });
+                // Add event listener to the form submit button
+                $("#strItemSubmit").click(function (e) {
+                    e.preventDefault(); // Prevent the default form submission
+                var apiUrl = '@ViewBag.ApiUrl';
+                console.log(apiUrl);
+                    // Initialize the form validation
+
+                    var itemName = $("#strItemName").val();
+                    var itemCode = $("#strItemCode").val();
+                    var stock = $("#strStock").val();
+                    var rate = $("#strRate").val();
+                    var gstRate = $("#strGstRate").val();
+
+                    if (!itemName || !itemCode || !stock || !rate || !gstRate) {
+                        return false;
+                    }
+                    if (id === null) {
+                        id = 0;
+                       }
+                    var formData = {
+                        ItemId: id,
+                        ItemName: itemName,
+                        ItemCode: itemCode,
+                        Price: rate,
+                        Stock: stock,
+                        GST: gstRate
+                         
+                    };
+               
+                    $.ajax({
+                        url: apiUrl + "item",
+                        type: "POST",
+                    data: JSON.stringify(formData),
+                    contentType: "application/json",
+                        success: function (response) {
+
+                            console.log(response.status);
+                       $("#strItemName").val("");
+                      $("#strItemCode").val("");
+                        $("#strStock").val("");
+                         $("#strRate").val("");
+                         $("#strGstRate").val("");
+                        window.location.href = "/Home/itemslist";
+                      
+                           
+                        },
+                        error: function ( e) {
+                           
+                            console.error("Error adding item: " + e);
+                            
+                        }
+                    });
+
+
+                    // Do something with the retrieved values
+                    console.log("Item Name: " + itemName);
+                    console.log("Item Code: " + itemCode);
+                    console.log("Stock: " + stock);
+                    console.log("Rate: " + rate);
+                    console.log("GST Rate: " + gstRate);
+
+                        
+            });
+     });
+        </script>
+</body>

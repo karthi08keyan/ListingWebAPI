@@ -1,0 +1,96 @@
+﻿@{
+    // Read the appsettings.json file
+    var config = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json")
+        .Build();
+
+    // Retrieve the API URL from the appsettings.json file
+    var apiUrl = config.GetSection("AppSettings:ApiUrl").Value;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProductListing</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProductListing.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <style>
+        header{
+            font-family: 'Roboto Mono', monospace;
+            background-image: -webkit-linear-gradient( 136deg,rgb(0,0,70) 0%,rgb(28,181,224) 100%);
+        }
+
+        .nav-link {
+           
+        }
+    </style>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-2 mt-2 shadow-sm p-3 mt-1  rounded" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+                
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
+                    <a class="navbar-brand" style=" color: white;font-size: 1.3rem;" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-dashboard" style="font-size:26px;color:white"></i> &nbsp;Dash Board</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="vr" style="color: white; width: 4px;"></div>
+                    <ul class="navbar-nav flex-grow-1" >
+                        <li class="nav-item">
+                            <a class="nav-link  " style=" color: white;font-size: 1.1rem;" asp-area="" asp-controller="Home" asp-action="Items">Items</a>
+                        </li>
+                        <div class="vr" style="color: white; width: 4px;"></div>
+                        <li class="nav-item">
+                            <a class="nav-link" style=" color: white;font-size: 1.1rem;" asp-area="" asp-controller="Home" asp-action="ItemsList">Items List</a>
+                        </li>
+                        <div class="vr" style="color: white; width: 4px;"></div>
+                        <li class="nav-item">
+                           
+                            <a class="nav-link " style=" color: white;font-size: 1.1rem;" asp-area="" asp-controller="Home" asp-action="Customer">Customer</a>
+                        </li>
+                        <div class="vr" style="color: white; width: 4px;"></div>
+                        <li class="nav-item">
+                            <a class="nav-link " style=" color: white;font-size: 1.1rem;" asp-area="" asp-controller="Home" asp-action="CustomerList">CustomerList</a>
+                        </li>
+                        <div class="vr" style="color: white; width: 4px;"></div>
+                        <li class="nav-item">
+                            <a class="nav-link " style=" color: white;font-size: 1.1rem;" asp-area="" asp-controller="Home" asp-action="BillService">Bill Service</a>
+                        </li>
+                        <div class="vr" style="color: white; width: 4px;"></div>
+                        <li class="nav-item">
+                            <a class="nav-link" style=" color: white;font-size: 1.1rem;" asp-area="" asp-controller="Home" asp-action="BillList">Bill List</a>
+                        </li>
+                        <div class="vr" style="color: white; width: 4px;"></div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+   
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,443 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    var apiUrl = Configuration["AppSettings:ApiUrl"];
+    ViewBag.ApiUrl = apiUrl;
+}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+<style>
+    label {
+        top: 0;
+        transform: translateY(0);
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    .error{
+        color:red;
+        font-size:0.9rem;
+    }
+    .container {
+        margin-top: 100px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 17px;
+        padding: 40px;
+        background-color: #ffffff;
+        font-family: 'Roboto Mono', monospace;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    .form-control {
+        border-color: unset;
+    }
+</style>
+<body style="
+  background-image: -webkit-linear-gradient( 136deg,rgb(0,0,70) 0%,rgb(28,181,224) 100%);
+">
+    <div class="container">
+        <div class="row  " id="stuFirstForm" style=" border-radius: 17px;">
+
+            <div class="row ">
+                <span style="
+                text-align: center;
+                font-size: 28px;
+               ">Customer</span>
+            </div>
+            <form id="myForm" action="items.cshtml" method="post">
+                <div class="row">
+                    <div class="col mb-3">
+                       
+                        <label class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" name="strCustomerName" id="strCustomerName">
+                            
+                            <span class="errorName"></span>
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Address</label>
+                            <input type="text" class="form-control " name="strAddress" id="strAddress">
+                           
+
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Email Address</label>
+                            <input type="text" class="form-control " name="strEmail" id="strEmail">
+                            
+
+                      
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Street</label>
+
+                            <input type="text" class="form-control" name="strStreet" id="strStreet">
+                            
+
+                      
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">City</label>
+                            <input type="text" class="form-control" name="strCity" id="strCity">
+                           
+
+                       
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+
+                        <label class="form-label">Pincode</label>
+                            <input type="text" class="form-control" name="strPincode" id="strPincode">
+                           
+
+                        
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Mobile Number</label>
+                            <input type="text" class="form-control" name="strMobileNumber" id="strMobileNumber">
+                            
+                            <span class="errorPhone"></span>
+                       
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                       
+                        <label class="form-label">Outstanding Amount</label>
+                            <input type="text" class="form-control" name="strOutstandingAmount" id="strOutstandingAmount">
+                            
+
+                       
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Outstanding Limit</label>
+                            <input type="text" class="form-control" name="strOutstandingLimit" id="strOutstandingLimit">
+                          
+
+                        
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col mb-3 " style="text-align: center;">
+                            <button class="btn btn-lg text-white " type="submit" id="strCustomerSubmit" style="border-radius: 26px;width: 86%;background-color: #55acee; ">Add Items&nbsp;<i class="fa fa-chevron-circle-right" style="font: size 22px;"></i></button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var id = localStorage.getItem("id");
+
+            var customerName = localStorage.getItem("customerName");
+            var address = localStorage.getItem("address");
+            var street = localStorage.getItem("street");
+            var city = localStorage.getItem("city");
+            var email = localStorage.getItem("email");
+            var pinCode = localStorage.getItem("pinCode");
+            var mobileNumber = localStorage.getItem("mobileNumber");
+            var outstandingAmount = localStorage.getItem("outstandingAmount");
+            var outstandingLimit = localStorage.getItem("outstandingLimit");
+            console.log("ghg");
+
+
+            // Clear the localStorage
+            localStorage.removeItem("id");
+
+            localStorage.removeItem("customerName");
+            localStorage.removeItem("address");
+            localStorage.removeItem("street");
+            localStorage.removeItem("city");
+            localStorage.removeItem("email");
+            localStorage.removeItem("mobileNumber");
+            localStorage.removeItem("pinCode");
+            localStorage.removeItem("outstandingAmount");
+            localStorage.removeItem("outstandingLimit");
+            $("#strCustomerName").val(customerName);
+            $("#strAddress").val(address);
+            $("#strStreet").val(street);
+            $("#strCity").val(city);
+            $("#strEmail").val(email);
+            $("#strPincode").val(pinCode);
+            $("#strMobileNumber").val(mobileNumber);
+            $("#strOutstandingAmount").val(outstandingAmount);
+            $("#strOutstandingLimit").val(outstandingLimit);
+
+
+            $('#strEmail').inputmask({ regex: "[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}" });
+            $('#strOutstandingAmount').inputmask('numeric', {
+
+                radixPoint: '.',
+                digits: 2,
+                allowMinus: false,
+                prefix: '',
+                suffix: '.00',
+                rightAlign: false,
+                autoGroup: true,
+                groupSeparator: ',',
+                groupSize: 4,
+                placeholder: '0',
+
+            }); $('#strOutstandingLimit').inputmask('numeric', {
+
+                radixPoint: '.',
+                digits: 2,
+                allowMinus: false,
+                prefix: '',
+                suffix: '.00',
+                rightAlign: false,
+                autoGroup: true,
+                groupSeparator: ',',
+                groupSize: 4,
+                placeholder: '0'
+            });
+
+            $('#strCustomerSubmit').click(function (e) {
+                var OutstandingAmountunmaskedValue = $('#strOutstandingAmount').inputmask('unmaskedvalue');
+
+                var OutstandingLimitValue = $('#strOutstandingLimit').inputmask('unmaskedvalue');
+
+
+                e.preventDefault();
+                var strCustomerName = $("#strCustomerName").val();
+                var strAddress = $("#strAddress").val();
+                var strStreet = $("#strStreet").val();
+                var strCity = $("#strCity").val();
+                var strEmail = $("#strEmail").val();
+                var strPincode = $("#strPincode").val();
+                var strMobileNumber = $("#strMobileNumber").val();
+                var strOutstandingAmount = $("#strOutstandingAmount").val();
+                var strOutstandingLimit = $("#strOutstandingLimit").val();
+                if (strMobileNumber.length < 10) {
+                    $('.errorPhone').text('Only 10 digits are allowed').css("color", "red").css("padding-left", "10px");
+                    return false;
+
+                } else {
+                    $('.errorPhone').text('');
+                }
+
+
+
+                var pattern = /^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/;;
+                if (!pattern.test(strEmail)) {
+                    alert("wrong")
+                    e.preventDefault();
+                }
+
+
+
+                if (!strCustomerName || !strAddress || !strStreet || !strCity || !strPincode
+                    || !strMobileNumber || !strOutstandingAmount
+                    || !strOutstandingLimit) {
+
+                    return false;
+                }
+                if (id === null) {
+                    id = 0;
+                }
+                var customerData = {
+                    CustomerId: id,
+                    CustomerName: strCustomerName,
+                    Address: strAddress,
+                    Street: strStreet,
+                    City: strCity,
+                    Email: strEmail,
+                    PinCode: strPincode,
+                    MobileNumber: strMobileNumber,
+                    OutstandingAmount: OutstandingAmountunmaskedValue,
+                    OutstandingLimit: OutstandingLimitValue
+
+                };
+                var apiUrl = '@ViewBag.ApiUrl';
+                console.log(customerData);
+              
+                $.ajax({
+                    url: apiUrl+ "customer",
+                    type: "POST",
+                    data: JSON.stringify(customerData),
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.status);
+                        $("#strCustomerName").val("");
+                        $("#strAddress").val("");
+                        $("#strStreet").val("");
+                        $("#strCity").val("");
+                        $("#strEmail").val("");
+                        $("#strPincode").val("");
+                        $("#strMobileNumber").val("");
+                        $("#strOutstandingAmount").val("");
+                        $("#strOutstandingLimit").val("");
+                    },
+                    error: function (exception) {
+                        console.error("Error adding item: " + exception);
+                    }
+                });
+            })
+
+            var inputName = $('#strItemName');
+            var errorName = $('.errorName');
+            var inputName = $('#strCustomerName');
+            var errorName = $('.errorName');
+            inputName.on('keypress', function (event) {
+                var key = String.fromCharCode(event.which);
+                var pattern = /[a-zA-Z ]/;
+                if (!pattern.test(key)) {
+                    event.preventDefault();
+                    errorName.text('Only alphabetic characters are allowed');
+                } else {
+                    errorName.text('');
+                }
+            });
+            var inputName = $('#strCity');
+            inputName.on('keypress', function (event) {
+                var key = String.fromCharCode(event.which);
+                var pattern = /[a-zA-Z ]/;
+                if (!pattern.test(key)) {
+                    event.preventDefault();
+                }
+            });
+            $("#strPincode").keypress(function (e) {
+                var key = String.fromCharCode(event.which);
+                var pincode = $(this).val();
+                var pattern = /[0-9]/;
+                if (pincode.length >= 6 || !pattern.test(key)) {
+                    e.preventDefault();
+                }
+            });
+            $("#strMobileNumber").keypress(function (e) {
+                var key = String.fromCharCode(event.which);
+                var pincode = $(this).val();
+                var pattern = /[0-9]/;
+                if (pincode.length >= 10 || !pattern.test(key)) {
+                    e.preventDefault();
+                }
+            });
+            $("#strOutstandingAmount").keypress(function (e) {
+                var key = String.fromCharCode(event.which);
+                var pincode = $(this).val();
+                var pattern = /[0-9]/;
+                if (pincode.length >= 10 || !pattern.test(key)) {
+                    e.preventDefault();
+                }
+            });
+            $("#strOutstandingLimit").keypress(function (e) {
+                var key = String.fromCharCode(event.which);
+                var pincode = $(this).val();
+                var pattern = /[0-9]/;
+                if (pincode.length >= 10 || !pattern.test(key)) {
+                    e.preventDefault();
+                }
+            });
+
+
+
+            $("#myForm").validate({
+                errorContainer: "#messageBox1, #messageBox2",
+                errorLabelContainer: "#messageBox1 ",
+                wrapper: "h6", debug: true,
+                rules: {
+                    strCustomerName: {
+                        required: true
+                    },
+                    strAddress: {
+                        required: true
+                    },
+                    strEmail: {
+                        required: true,
+                        email: true
+                    },
+                    strStreet: {
+                        required: true
+                    },
+                    strCity: {
+                        required: true
+                    },
+                    strPincode: {
+                        required: true
+                    },
+                    strMobileNumber: {
+                        required: true,
+                        digits: true,
+                    },
+                    strOutstandingAmount: {
+                        required: true
+                    },
+                    strOutstandingLimit: {
+                        required: true
+                    }
+                },
+                messages: {
+                    strCustomerName: {
+                        required: "Please enter customer name"
+                    },
+                    strAddress: {
+                        required: "Please enter address"
+                    },
+                    strEmail: {
+                        required: 'Please enter email .',
+                        email: 'Please enter a valid email .'
+                    },
+
+                    strStreet: {
+                        required: "Please enter street"
+                    },
+                    strCity: {
+                        required: "Please enter city"
+                    },
+                    strPincode: {
+                        required: "Please enter pincode"
+                    },
+                    strMobileNumber: {
+                        required: "Please enter mobile number",
+                        digits: "enter va"
+                    },
+                    strOutstandingAmount: {
+                        required: "Please enter outstanding amount"
+                    },
+                    strOutstandingLimit: {
+                        required: "Please enter outstanding limit"
+                    }
+                }
+
+            });
+
+
+
+        })
+
+
+    </script>
+
+
+</body>
